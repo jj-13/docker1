@@ -1,16 +1,19 @@
+version: '3'
 services:
   app:
-    image: python:3.11-slim-buster
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - 0.0.0.0:8000:8000
-    working_dir: /app
+      - "8000:8000"
     volumes:
-      - ./:/app
+      - .:/app
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
       MYSQL_PASSWORD: secret
       MYSQL_DB: my_database
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
   mysql:
     image: mysql:8.0

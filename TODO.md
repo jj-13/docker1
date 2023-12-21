@@ -59,3 +59,61 @@ DATABASES = {
 
 mysql -ppass -uroot
 
+services:
+  app:
+    image: python:3.11-slim-buster
+    ports:
+      - 0.0.0.0:8000:8000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: my_database
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - django-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: my_database
+
+volumes:
+  django-mysql-data: {}
+
+al anterior archivo le puedes agregar el siguiente mysql: 
+mysql:
+    image: mysql:8.0
+    volumes:
+      - django-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: my_database
+
+volumes:
+  django-mysql-data: {}
+
+y hacer que concuerden los volumenes del app y mysql
+
+y en el archivo settings.py en django que debe ir en DATABASES para que quede conectado con el compose anterior:
+
+DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'my_database',
+        'USER': 'root',
+        'PASSWORD': 'secret',
+        'HOST': 'mysql',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
+}
