@@ -96,10 +96,10 @@ DATABASES = {
         'PASSWORD': getenv('MYSQL_PASSWORD', 'secret'),
         'HOST': getenv('MYSQL_HOST', 'mysql'),# Use 'mysql' as you defined in your docker-compose.yml
         'PORT': getenv('MYSQL_PORT', '3306'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'auth_plugin': 'mysql_native_password'
-        }
+        # 'OPTIONS': {
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        #     'auth_plugin': 'mysql_native_password'
+        # }
     }
 }
 
