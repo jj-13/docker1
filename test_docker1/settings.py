@@ -117,6 +117,7 @@ DATABASES = {
         'PASSWORD': getenv('POSTGRES_PASSWORD', 'secret'),
         'HOST': getenv('POSTGRES_HOST', 'postgres'),# Use 'postgres' as you defined in your docker-compose.yml
         'PORT': getenv('POSTGRES_PORT', '5432'),
+        'OPTIONS': {}
     }
 }
 

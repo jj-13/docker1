@@ -13,33 +13,6 @@ crear una network postgresql y conectar la aplicacion
 
 mysql -ppass -uroot
 docker exec -it nombre_del_contenedor mysql -u root -p
+docker exec -it <id_contenedor> psql -U postgres
 
-cambia en el siguiente compose mysql por un contenedor postgresql
 
-version: '3'
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DB: my_database
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-  mysql:
-    image: mysql:8.0
-    volumes:
-      - django-mysql-data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: my_database
-
-volumes:
-  django-mysql-data: {}
