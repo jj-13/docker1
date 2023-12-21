@@ -89,17 +89,34 @@ DATABASES = {
     #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
     #     }
     # }
+    # 'default': {
+    #     'ENGINE': 'mysql.connector.django',
+    #     'NAME': getenv('MYSQL_DATABASE', 'my_database'),
+    #     'USER': getenv('MYSQL_USER', 'root'),
+    #     'PASSWORD': getenv('MYSQL_PASSWORD', 'secret'),
+    #     'HOST': getenv('MYSQL_HOST', 'mysql'),# Use 'mysql' as you defined in your docker-compose.yml
+    #     'PORT': getenv('MYSQL_PORT', '3306'),
+    #     # 'OPTIONS': {
+    #     #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+    #     #     'auth_plugin': 'mysql_native_password'
+    #     # }
+    # }
+    # 'default': {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     #"ENGINE": "django.db.backends.postgresql_psycopg2",
+    #     "NAME": "postgres",
+    #     "USER": "postgres",
+    #     "PASSWORD": "postgres",
+    #     "HOST": "db",  # set in docker-compose.yml
+    #     "PORT": 5432,  # default postgres port
+    # }
     'default': {
-        'ENGINE': 'mysql.connector.django',
-        'NAME': getenv('MYSQL_DATABASE', 'my_database'),
-        'USER': getenv('MYSQL_USER', 'root'),
-        'PASSWORD': getenv('MYSQL_PASSWORD', 'secret'),
-        'HOST': getenv('MYSQL_HOST', 'mysql'),# Use 'mysql' as you defined in your docker-compose.yml
-        'PORT': getenv('MYSQL_PORT', '3306'),
-        # 'OPTIONS': {
-        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        #     'auth_plugin': 'mysql_native_password'
-        # }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': getenv('POSTGRES_DB', 'my_database'),
+        'USER': getenv('POSTGRES_USER', 'postgres'),
+        'PASSWORD': getenv('POSTGRES_PASSWORD', 'secret'),
+        'HOST': getenv('POSTGRES_HOST', 'postgres'),# Use 'postgres' as you defined in your docker-compose.yml
+        'PORT': getenv('POSTGRES_PORT', '5432'),
     }
 }
 

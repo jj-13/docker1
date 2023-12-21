@@ -1,6 +1,27 @@
-version: "3.9"
+version: '3'
 services:
-  database:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "3306:3306"
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: my_database
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - django-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: my_database
+
+volumes:
+  django-mysql-data: {}
