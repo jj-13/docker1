@@ -56,3 +56,5 @@ DATABASES = {
         'OPTIONS': {'auth_plugin': 'mysql_native_password'},
         }
 }
+
+mysql -ppass -uroot
