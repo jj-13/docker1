@@ -59,10 +59,3 @@ DATABASES = {
 
 mysql -ppass -uroot
 
-en el archivo de settings.py en un projecto django que configuracion debe ir en DATABASES para conectarse correctamente con un contenedor mysql
-
-contendio del Dockerfile de mysql:
-FROM mysql:8
-
-ENV MYSQL_ROOT_PASSWORD pass
-COPY ./data.sql /docker-entrypoint-initdb.d/data.sql

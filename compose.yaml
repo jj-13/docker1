@@ -21,4 +21,4 @@ services:
       MYSQL_DATABASE: my_database
 
 volumes:
-  todo-mysql-data: {}
+  django-mysql-data: {}
