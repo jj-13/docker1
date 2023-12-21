@@ -90,7 +90,7 @@ DATABASES = {
     #     }
     # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': getenv('MYSQL_DATABASE', 'my_database'),
         'USER': getenv('MYSQL_USER', 'root'),
         'PASSWORD': getenv('MYSQL_PASSWORD', 'secret'),
