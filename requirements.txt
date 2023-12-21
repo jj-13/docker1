@@ -8,3 +8,4 @@ djangorestframework-simplejwt==5.3.1
 Faker==21.0.0
 wheel==0.42.0
 mysqlclient==2.2.1
+mysql-connector-python==8.2.0
