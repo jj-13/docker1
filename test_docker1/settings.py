@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
 from os import getenv
 from pathlib import Path
 
@@ -84,10 +85,10 @@ WSGI_APPLICATION = 'test_docker1.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'my_database',
@@ -120,15 +121,15 @@ DATABASES = {
     #     "HOST": "db",  # set in docker-compose.yml
     #     "PORT": 5432,  # default postgres port
     # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': getenv('POSTGRES_DB', 'my_database'),
-        'USER': getenv('POSTGRES_USER', 'postgres'),
-        'PASSWORD': getenv('POSTGRES_PASSWORD', 'secret'),
-        'HOST': getenv('POSTGRES_HOST', 'postgres'),# Use 'postgres' as you defined in your docker-compose.yml
-        'PORT': getenv('POSTGRES_PORT', '5432'),
-        'OPTIONS': {}
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': getenv('POSTGRES_DB', 'my_database'),
+    #     'USER': getenv('POSTGRES_USER', 'postgres'),
+    #     'PASSWORD': getenv('POSTGRES_PASSWORD', 'secret'),
+    #     'HOST': getenv('POSTGRES_HOST', 'postgres'),# Use 'postgres' as you defined in your docker-compose.yml
+    #     'PORT': getenv('POSTGRES_PORT', '5432'),
+    #     'OPTIONS': {}
+    # }
 }
 
 
@@ -171,6 +172,9 @@ CORS_ALLOWED_ORIGINS = [
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (BASE_DIR, 'static')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
