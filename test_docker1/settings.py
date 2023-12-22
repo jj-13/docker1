@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'drf_yasg',# para el swagger
     'base',
     'productos',
-    'drf_yasg',# para el swagger
+    'persona_app'
 ]
 
 SWAGGER_SETTINGS = {
