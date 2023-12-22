@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'base',
+    'productos',
 ]
 
 MIDDLEWARE = [
@@ -74,10 +76,10 @@ WSGI_APPLICATION = 'test_docker1.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'my_database',
@@ -110,15 +112,15 @@ DATABASES = {
     #     "HOST": "db",  # set in docker-compose.yml
     #     "PORT": 5432,  # default postgres port
     # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': getenv('POSTGRES_DB', 'my_database'),
-        'USER': getenv('POSTGRES_USER', 'postgres'),
-        'PASSWORD': getenv('POSTGRES_PASSWORD', 'secret'),
-        'HOST': getenv('POSTGRES_HOST', 'postgres'),# Use 'postgres' as you defined in your docker-compose.yml
-        'PORT': getenv('POSTGRES_PORT', '5432'),
-        'OPTIONS': {}
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': getenv('POSTGRES_DB', 'my_database'),
+    #     'USER': getenv('POSTGRES_USER', 'postgres'),
+    #     'PASSWORD': getenv('POSTGRES_PASSWORD', 'secret'),
+    #     'HOST': getenv('POSTGRES_HOST', 'postgres'),# Use 'postgres' as you defined in your docker-compose.yml
+    #     'PORT': getenv('POSTGRES_PORT', '5432'),
+    #     'OPTIONS': {}
+    # }
 }
 
 
