@@ -14,5 +14,3 @@ crear una network postgresql y conectar la aplicacion
 mysql -ppass -uroot
 docker exec -it nombre_del_contenedor mysql -u root -p
 docker exec -it <id_contenedor> psql -U postgres
-
-
