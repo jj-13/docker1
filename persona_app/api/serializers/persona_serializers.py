@@ -9,6 +9,7 @@ class PersonaSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         return {
+            'id': instance.id,
             'nombre': instance.nombre,
             'apellidos': instance.apellidos,
             'tipo_documento': instance.tipo_documento,
