@@ -1,5 +1,13 @@
 version: '3'
 services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - django-postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: my_database
+
   app:
     build:
       context: .
@@ -13,16 +21,10 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: my_database
-    #command: ["/bin/bash", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-  postgres:
-    image: postgres:latest
-    volumes:
-      - django-postgres-data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: my_database
+    command: ["/bin/bash", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+    #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      - postgres
 
 volumes:
   django-postgres-data: {}
