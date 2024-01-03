@@ -94,7 +94,13 @@ pipeline {
 
 jenkins_deploy_prod_docker.sh:
 
-ssh -T ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com <<EOF
+#!/bin/sh
+
+eval $(ssh-agent -s)
+ssh-add /etc/ssh/ssh_host_ed25519_key
+
+#ssh -T root@buildkitsandbox <<EOF
+ssh -o StrictHostKeyChecking=no -T ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com <<EOF
   git pull
   cd docker1/
   docker compose up -d
@@ -221,3 +227,28 @@ iV5z8a26+WuimLO/Xqer4FaH/+GRXA1N8VhzOsQUa6RW2V806w3fQbBQxnL+tZ+cde8fQL
 -----END OPENSSH PRIVATE KEY-----
 
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCrkF+4gOYCH2NX+5aF3Lgp0f2uZ7lRwqaqxGo8BVRi3+P7vGYQKCe6ZfdanpNz4JkhyH65ny/aVBCSIZG38/uZNVtpIWBT/sOwUnruxEMp9hjdZYeUZwE3cXEB2K6z9wZs9v8gpaUfaPg7pWte1WO96bwJWgZDKYGZxL0yUtamNKnb0i3O7+f3RkK8ghKaAKE2qbeRiHvjiRPCa1uBEGImtmp4AczefsjyN5LLN5Cps5R6suauemFIJSptp87v8fnJuQa9+D/+uuE48dQeIDYcXEZa7aw6BQyRJ9HxB/v9FoJDwuVwbIIr3/vzTPyni/x3exR2ZtUehqfBBs0sntkxrd0FGdPY7nH9QL5gmaW5JksNdUtwdbJTdauOFYw0cWsrICv4q+vGm9ysCAaQdW7tRaBmwX60IxGyzCgweqTQ3EKS3182LuxHMuT/zDPVQvEvqJbwdogAyygl97v9v4l/iyg+HufUhSIlTVjxByX3ZC9mh9fONd15c40QI4G0i3E= root@node1
+
+ssh-add -l -E sha256
+
+el archivo jenkins_deploy_prod_docker quedo asi:
+
+jenkins_deploy_prod_docker.sh:
+
+#!/bin/sh
+
+eval $(ssh-agent -s)
+ssh-add /etc/ssh/ssh_host_ed25519_key
+
+#ssh -T root@buildkitsandbox <<EOF
+ssh -o StrictHostKeyChecking=no -T ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com <<EOF
+  git pull
+  cd docker1/
+  docker compose up -d
+  exit
+EOF
+
+pero sale este error:
++ ./jenkins_deploy_prod_docker.sh
+Agent pid 3697
+/etc/ssh/ssh_host_ed25519_key: No such file or directory
+ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com: Permission denied (publickey).
