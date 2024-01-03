@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git pull
+git clone https://github.com/jj-13/docker1.git
 cd docker1/
 docker compose up -d
 
