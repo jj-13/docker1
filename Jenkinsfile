@@ -13,6 +13,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                sh 'pwd'
                 sh 'chmod +x jenkins_deploy_prod_docker.sh'
                 sh './jenkins_deploy_prod_docker.sh'
             }
