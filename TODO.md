@@ -162,4 +162,6 @@ services:
 volumes:
   django-postgres-data: {}
 
-pero da error al conectarse al ssh -T ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com
+pero al conectarse al ssh -T ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com da error:
++ ./jenkins_deploy_prod_docker.sh
+Host key verification failed.
