@@ -2,6 +2,8 @@ version: '3'
 services:
   postgres:
     image: postgres:latest
+    networks:
+      - mynetwork
     volumes:
       - django-postgres-data:/var/lib/postgresql/data
     environment:
@@ -14,6 +16,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    networks:
+      - mynetwork
     volumes:
       - .:/app
     environment:
@@ -31,4 +35,7 @@ services:
 
 volumes:
   django-postgres-data: {}
+
+networks:
+  mynetwork: {}
 

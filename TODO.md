@@ -304,3 +304,39 @@ cd tempdir
 docker build -t django_app .
 docker run -dp 0.0.0.0:8000:8000 django_app
 docker ps
+
+al siguiente compose.yaml agregale el networks 
+
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - django-postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: my_database
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: my_database
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_EMAIL: admin@gmail.com
+      DJANGO_SUPERUSER_PASSWORD: admin369
+    command: ["/bin/bash", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000"]
+    #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    depends_on:
+      - postgres
+
+volumes:
+  django-postgres-data: {}
