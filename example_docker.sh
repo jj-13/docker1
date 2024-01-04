@@ -4,8 +4,9 @@ mkdir tempdir
 
 echo "FROM python:3.11-slim-buster" >> tempdir/Dockerfile
 echo "WORKDIR /app" >> tempdir/Dockerfile
-echo "COPY . ." >> tempdir/Dockerfile
-echo "ls" >> tempdir/Dockerfile
+echo "COPY ../ ." >> tempdir/Dockerfile
+cd tempdir
+ls
 #echo "RUN apt-get update && apt-get install -y default-libmysqlclient-dev pkg-config gcc vim && rm -rf /var/lib/apt/lists/*" >> tempdir/Dockerfile
 #echo "RUN pip install --upgrade pip" >> tempdir/Dockerfile
 #echo "RUN pip install -r requirements.txt" >> tempdir/Dockerfile
