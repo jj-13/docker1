@@ -305,12 +305,14 @@ docker build -t django_app .
 docker run -dp 0.0.0.0:8000:8000 django_app
 docker ps
 
-al siguiente compose.yaml agregale el networks 
+puedes verificar los networks de los siguientes comandos si estan bien porque el networks de app no lo crea al ejecutar el compose
 
 version: '3'
 services:
   postgres:
     image: postgres:latest
+    networks:
+      - mynetwork
     volumes:
       - django-postgres-data:/var/lib/postgresql/data
     environment:
@@ -323,6 +325,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    networks:
+      - mynetwork
     volumes:
       - .:/app
     environment:
@@ -333,10 +337,12 @@ services:
       DJANGO_SUPERUSER_USERNAME: admin
       DJANGO_SUPERUSER_EMAIL: admin@gmail.com
       DJANGO_SUPERUSER_PASSWORD: admin369
-    command: ["/bin/bash", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000"]
-    #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: ["/bin/bash", "-c", "python manage.py runserver 0.0.0.0:8000"]
     depends_on:
       - postgres
 
 volumes:
   django-postgres-data: {}
+
+networks:
+  mynetwork: {}
