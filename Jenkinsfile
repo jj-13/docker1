@@ -66,3 +66,43 @@ pipeline {
     }
 }
 */
+
+/*
+pipeline {
+    agent any
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // SSH into the remote Docker server
+                    sshagent(['my-ssh-credentials-id']) {
+                        sh """
+                            ssh user@remote-docker-server <<EOF
+                            cd /path/to/dockerfile
+                            docker build -t my-app .
+                            EOF
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // SSH into the remote Docker server
+                    sshagent(['my-ssh-credentials-id']) {
+                        sh """
+                            ssh user@remote-docker-server <<EOF
+                            docker run -d -p 8080:8080 my-app
+                            EOF
+                        """
+                    }
+                }
+            }
+        }
+    }
+}
+
+*/
