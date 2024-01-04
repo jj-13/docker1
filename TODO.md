@@ -276,27 +276,31 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDXi2sSmGaJgF3RqY5FfpHFAAPqAb6pQLrlkuq57hA+
 
 ssh-add -l -E sha256
 
-el archivo jenkins_deploy_prod_docker quedo asi:
+al ejecutar el archivo example_docker.sh desde un job en jenkins sale este error:
+[build_app_job] $ /bin/sh -xe /tmp/jenkins8868534962604727975.sh
++ bash ./example_docker.sh
+ERROR: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied
+docker: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/create": dial unix /var/run/docker.sock: connect: permission denied.
+See 'docker run --help'.
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
 
-jenkins_deploy_prod_docker.sh:
-
+contenido del archivo example_docker.sh:
 #!/bin/sh
 
-eval $(ssh-agent -s)
-ssh-add /etc/ssh/ssh_host_ed25519_key
+mkdir tempdir
 
-#ssh -T root@buildkitsandbox <<EOF
-ssh -o StrictHostKeyChecking=no -T ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com <<EOF
-  git pull
-  cd docker1/
-  docker compose up -d
-  exit
-EOF
+echo "FROM python:3.11-slim-buster" >> tempdir/Dockerfile
+echo "WORKDIR /app" >> tempdir/Dockerfile
+echo "COPY . ." >> tempdir/Dockerfile
+echo "RUN apt-get update && apt-get install -y default-libmysqlclient-dev pkg-config gcc vim && rm -rf /var/lib/apt/lists/*" >> tempdir/Dockerfile
+echo "RUN pip install --upgrade pip" >> tempdir/Dockerfile
+echo "RUN pip install -r requirements.txt" >> tempdir/Dockerfile
+echo "EXPOSE 8000" >> tempdir/Dockerfile
+echo "CMD python manage.py runserver 0.0.0.0:8000" >> tempdir/Dockerfile
 
-pero sale este error:
-+ ./jenkins_deploy_prod_docker.sh
-Agent pid 3697
-/etc/ssh/ssh_host_ed25519_key: No such file or directory
-ip172-18-0-38-cmalihao7r5g00avnp5g@direct.labs.play-with-docker.com: Permission denied (publickey).
-pwd
-/var/jenkins_home/workspace/django1_main
+cd tempdir
+docker build -t django_app .
+docker run -dp 0.0.0.0:8000:8000 django_app
+docker ps
