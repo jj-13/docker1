@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir tempdir
+#mkdir tempdir
 
 echo "FROM python:3.11-slim-buster" >> tempdir/Dockerfile
 echo "WORKDIR /app" >> tempdir/Dockerfile
