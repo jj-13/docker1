@@ -1,7 +1,7 @@
 #!/bin/sh
 
-docker compose up
-#docker compose up -d
+docker compose up -d
+#docker compose up
 #mkdir tempdir
 #echo "FROM python:3.11-slim-buster" >> tempdir/Dockerfile
 #echo "WORKDIR /app" >> tempdir/Dockerfile
