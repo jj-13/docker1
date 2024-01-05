@@ -12,7 +12,8 @@ services:
 
   app:
     build:
-      context: .
+      context: /var/jenkins_home/workspace/buildApp_Job  # Ruta específica del contexto
+      #context: .
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
