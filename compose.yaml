@@ -12,7 +12,7 @@ services:
 
   app:
     build:
-      context: /var/jenkins_home/workspace/buildApp_Job  # Ruta específica del contexto
+      context: /var/jenkins_home/workspace/build  # Ruta especifica del contexto
       #context: .
       dockerfile: Dockerfile
     ports:
