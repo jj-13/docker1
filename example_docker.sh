@@ -1,6 +1,6 @@
 #!/bin/sh
 
-docker-compose up -d -f ./docker-compose.yml
+docker-compose up -d
 #docker compose up
 #mkdir tempdir
 #echo "FROM python:3.11-slim-buster" >> tempdir/Dockerfile
