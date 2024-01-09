@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     build:
-      context: /var/jenkins_home/workspace/build1_  # Ruta especifica del contexto
+      context: /var/jenkins_home/workspace/build2_  # Ruta especifica del contexto
       #context: .
       dockerfile: Dockerfile
     ports:
