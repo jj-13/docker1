@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Build and Deploy') {
       steps {
-        sh 'docker compose up -d'
+        sh 'chmod +x example_docker.sh'
+        sh './example_docker.sh'
       }
     }
   }
