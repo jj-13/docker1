@@ -4,13 +4,15 @@ pipeline {
     stage("build") {
       steps {
         sh """
-          docker compose up -d
+          docker build -t django_app .
         """
       }
     }
     stage("run") {
       steps {
-        echo "Deployment successful"
+        sh """
+          docker run -dp 0.0.0.0:8000:8000 django_app
+        """
       }
     }
   }
