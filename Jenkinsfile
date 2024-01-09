@@ -4,6 +4,8 @@ pipeline {
     stage('Build and Deploy') {
       steps {
         sh 'chmod +x example_docker.sh'
+        sh 'pwd'
+        sh 'ls -l'
         sh './example_docker.sh'
       }
     }
