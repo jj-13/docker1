@@ -6,8 +6,8 @@ pipeline {
         sh 'chmod +x example_docker.sh'
         sh 'pwd'
         sh 'ls -l'
-        sh 'docker-compose up -d -f ./docker-compose.yml'
-        //sh './example_docker.sh'
+        //sh 'docker-compose up -d -f ./docker-compose.yml'
+        sh './example_docker.sh'
       }
     }
   }

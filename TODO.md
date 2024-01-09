@@ -20,3 +20,16 @@ https://copyprogramming.com/howto/how-to-to-use-django-createsuperuser-noinput-c
 agregar python manage.py createsuperuser --no-input con las variables de entorno correspondientes
 DJANGO_SUPERUSER_USERNAME=admin DJANGO_SUPERUSER_EMAIL=admin@example.com DJANGO_SUPERUSER_PASSWORD=xxxxx
 python manage.py createsuperuser --no-input --username DJANGO_SUPERUSER_USERNAME=admin --email DJANGO_SUPERUSER_EMAIL=admin@example.com --password DJANGO_SUPERUSER_PASSWORD=xxxxx
+
+en el contenedor de jenkins toca agregar los siguientes comandos para que se pueda ejecutar los comandos docker
+  groupadd docker
+  usermod -aG docker root
+  chmod 666 /var/run/docker.sock
+
+y los siguiente comandos si los reconoce dentro del contenedor de jenkins:
+docker build -t app_django .
+docker run -dp 0.0.0.0:8000:8000 app_django
+
+pero al usar dentro del contenedor de jenkins el comando docker-compose up -d sale el siguiente error:
+bash: docker-compose: command not found, para que funcione el comando docker-compose se tendra que agregar otros permisos o que hago para que funcione el comando
+docker-compose?
