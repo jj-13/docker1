@@ -12,7 +12,7 @@ services:
 
   app:
     build:
-      context: /var/jenkins_home/workspace/backend_  # Ruta especifica del contexto o #context: .
+      context: .  # Ruta especifica del contexto o #context: /var/jenkins_home/workspace/backend_
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
