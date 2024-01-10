@@ -37,6 +37,10 @@ services:
 volumes:
   django-postgres-data: {}
 
+networks:
+  jenkins_default:
+    external: true
+
 #networks:
 #  mynetwork: {}
 
