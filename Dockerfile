@@ -23,7 +23,10 @@ WORKDIR /app
 COPY . .
 
 # Update the package list and install dependencies
-RUN apt-get update && apt-get install -y default-libmysqlclient-dev pkg-config gcc vim && rm -rf /var/lib/apt/lists/*
+#RUN apt-get update && apt-get install -y default-libmysqlclient-dev pkg-config gcc vim && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -y default-libmysqlclient-dev pkg-config gcc vim
+RUN rm -rf /var/lib/apt/lists/*
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip
