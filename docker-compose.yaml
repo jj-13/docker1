@@ -12,8 +12,8 @@ services:
 
   app:
     build:
-      context: .  # Ruta especifica del contexto o #context: /var/jenkins_home/workspace/backend_
-      dockerfile: /var/jenkins_home/workspace/backend_/Dockerfile
+      context: /var/jenkins_home/workspace/backend_/  # Ruta especifica del contexto o #context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     networks:
@@ -28,7 +28,7 @@ services:
       DJANGO_SUPERUSER_USERNAME: admin
       DJANGO_SUPERUSER_EMAIL: admin@gmail.com
       DJANGO_SUPERUSER_PASSWORD: admin369
-    command: ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000"]
+    command: ["/bin/bash", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000"]
     depends_on:
       - postgres
     stdin_open: true  # Mantén STDIN abierto para que el contenedor no se cierre automáticamente #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
