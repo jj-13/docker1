@@ -3,7 +3,7 @@ services:
   postgres:
     image: postgres:latest
     networks:
-      - mynetwork
+      - jenkins_default
     volumes:
       - django-postgres-data:/var/lib/postgresql/data
     environment:
@@ -12,13 +12,12 @@ services:
 
   app:
     build:
-      context: /var/jenkins_home/workspace/build  # Ruta especifica del contexto
-      #context: .
+      context: /var/jenkins_home/workspace/backend  # Ruta especifica del contexto o #context: .
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
     networks:
-      - mynetwork
+      - jenkins_default
     volumes:
       - .:/app
     environment:
@@ -30,15 +29,14 @@ services:
       DJANGO_SUPERUSER_EMAIL: admin@gmail.com
       DJANGO_SUPERUSER_PASSWORD: admin369
     command: ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000"]
-    #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     depends_on:
       - postgres
-    stdin_open: true  # Mantén STDIN abierto para que el contenedor no se cierre automáticamente
+    stdin_open: true  # Mantén STDIN abierto para que el contenedor no se cierre automáticamente #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     tty: true         # Mantén TTY abierto para que el contenedor no se cierre automáticamente
 
 volumes:
   django-postgres-data: {}
 
-networks:
-  mynetwork: {}
+#networks:
+#  mynetwork: {}
 
