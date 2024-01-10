@@ -12,14 +12,15 @@ services:
 
   app:
     build:
-      context: .  # Ruta especifica del contexto o #context: /var/jenkins_home/workspace/backend_/
-      dockerfile: Dockerfile
+      context: /var/jenkins_home/workspace/backend_/  # Ruta especifica del contexto o #context: .
+      dockerfile: /var/jenkins_home/workspace/backend_/Dockerfile
     ports:
       - "8000:8000"
     networks:
       - jenkins_default
     volumes:
       - .:/app
+      - jenkins_jenkins_home:/var/jenkins_home  # Nuevo volumen agregado
     environment:
       POSTGRES_HOST: postgres
       POSTGRES_USER: postgres
@@ -36,6 +37,7 @@ services:
 
 volumes:
   django-postgres-data: {}
+  jenkins_jenkins_home: {}  # Nuevo volumen agregado
 
 networks:
   jenkins_default:
