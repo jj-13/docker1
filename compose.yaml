@@ -39,7 +39,8 @@ volumes:
 
 networks:
   jenkins_default:
-    external: true
+    external:
+      name: jenkins_default
 
 #networks:
 #  mynetwork: {}
