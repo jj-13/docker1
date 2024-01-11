@@ -32,8 +32,8 @@ services:
     #command: bash -c python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000
     depends_on:
       - postgres
-    stdin_open: true  # Mantén STDIN abierto para que el contenedor no se cierre automáticamente #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-    tty: true         # Mantén TTY abierto para que el contenedor no se cierre automáticamente
+    #stdin_open: true  # Mantén STDIN abierto para que el contenedor no se cierre automáticamente #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    #tty: true         # Mantén TTY abierto para que el contenedor no se cierre automáticamente
 
 volumes:
   django-postgres-data: {}
