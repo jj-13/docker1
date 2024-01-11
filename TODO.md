@@ -33,3 +33,17 @@ docker run -dp 0.0.0.0:8000:8000 app_django
 pero al usar dentro del contenedor de jenkins el comando docker-compose up -d sale el siguiente error:
 bash: docker-compose: command not found, para que funcione el comando docker-compose se tendra que agregar otros permisos o que hago para que funcione el comando
 docker-compose?
+
+el siguiente sh:
+sh 'docker exec -i django_app_c /bin/bash -c "echo \\"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser("\\admin\\", "\\admin@gmail.com\\", "\\admin369\\"\\)"\\ | python manage.py shell"'
+
+ejecuta el siguiente comando:
+docker exec -i django_app_c /bin/bash -c echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(admin", \admin@gmail.com", admin369")\ | python manage.py shell
+
+pero esta mal por que deberia ser:
+User.objects.create_superuser('admin', 'admin@gmail.com', 'dmin369')
+pero sale
+User.objects.create_superuser(admin", \admin@gmail.com", admin369")\
+
+verifica los \\ para en el sh para para que quede el comando como el siguiente
+sh 'docker exec -i django_app_c /bin/bash -c "echo \\"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@gmail.com', 'dmin369') | python manage.py shell"'
