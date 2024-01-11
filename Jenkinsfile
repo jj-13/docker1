@@ -17,6 +17,7 @@ pipeline {
         sh 'docker exec -i django_app_c /bin/bash -c "python manage.py makemigrations && python manage.py migrate"'
         //sh 'docker cp create_superuser.py django_app_c:/create_superuser.py' //para cuando se agregan archivos al repo y ya esta creado el contenedor
         sh 'docker exec -i django_app_c python manage.py shell < create_superuser.py'
+        sh 'docker exec -i django_app_c python manage.py test'
       }
     }
   }
