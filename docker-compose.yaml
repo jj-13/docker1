@@ -29,7 +29,7 @@ services:
       DJANGO_SUPERUSER_USERNAME: admin
       DJANGO_SUPERUSER_EMAIL: admin@gmail.com
       DJANGO_SUPERUSER_PASSWORD: admin369
-    command: bash -c python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000
+    #command: bash -c python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input && python manage.py runserver 0.0.0.0:8000
     depends_on:
       - postgres
     stdin_open: true  # Mantén STDIN abierto para que el contenedor no se cierre automáticamente #command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
