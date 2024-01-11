@@ -14,7 +14,7 @@ pipeline {
       steps {
         sh 'docker run -dp 0.0.0.0:8000:8000 --name django_app_c --network jenkins_default backend__app'
         sh 'ls'
-        sh 'docker exec -i django_app_c /bin/bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input'
+        sh 'docker exec -i django_app_c /bin/bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py createsuperuser --no-input"'
       }
     }
   }
